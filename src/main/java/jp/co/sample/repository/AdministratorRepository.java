@@ -24,7 +24,7 @@ public class AdministratorRepository {
 	public static final RowMapper<Administrator> ADMINISTRATOR_ROW_MAPPER = (rs, i) -> {
 		Administrator administrator = new Administrator();
 		administrator.setId(rs.getInt("id"));
-		administrator.setName(rs.getString("nam"));
+		administrator.setName(rs.getString("name"));
 		administrator.setMailAddress(rs.getString("mail_address"));
 		administrator.setPassword(rs.getString("password"));
 		return administrator;
@@ -34,13 +34,26 @@ public class AdministratorRepository {
 	private NamedParameterJdbcTemplate template;
 
 	/**
+	 * 主キーから管理者情報を取得します
+	 * @param id ID
+	 * @return 管理者情報
+	 * @throws EmptyDataAccessException 存在しない場合は例外を発生
+	 */
+	public Administrator load(Integer id) {
+		String sql ="SELECT id, name, mail_address, password FROM administrators WHERE id=:id";
+		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
+		Administrator administrator = template.queryForObject(sql, param, ADMINISTRATOR_ROW_MAPPER);
+		return administrator;
+	}
+
+	/**
 	 * メールアドレスとパスワードから管理者情報を取得
 	 * @param mailAddress	メールアドレス
 	 * @param password	パスワード
 	 * @return 管理者情報 存在しない場合はnullを返す
 	 */
 	public Administrator findByMailAddressAndPassword(String mailAddress, String password) {
-		String sql ="SELECT id,name,mail_address,password FROM administrators"
+		String sql ="SELECT id,name,mail_address,password FROM administrators "
 				+ "WHERE mail_address=:mailAddress and password=:password";
 		SqlParameterSource param = new MapSqlParameterSource()
 				.addValue("mailAddress", mailAddress).addValue("password", password);

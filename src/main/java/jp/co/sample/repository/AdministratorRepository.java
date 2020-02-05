@@ -40,7 +40,7 @@ public class AdministratorRepository {
 	 * @return 管理者情報 存在しない場合はnullを返す
 	 */
 	public Administrator findByMailAddressAndPassword(String mailAddress, String password) {
-		String sql ="SELECT id,name,mail_address,password FROM administrator"
+		String sql ="SELECT id,name,mail_address,password FROM administrators"
 				+ "WHERE mail_address=:mailAddress and password=:password";
 		SqlParameterSource param = new MapSqlParameterSource()
 				.addValue("mailAddress", mailAddress).addValue("password", password);

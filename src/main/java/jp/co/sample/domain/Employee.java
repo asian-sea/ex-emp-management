@@ -1,6 +1,6 @@
 package jp.co.sample.domain;
 
-import java.security.Timestamp;
+import java.util.Date;
 
 /**
  *
@@ -13,7 +13,7 @@ public class Employee {
 	private String name;
 	private String image;
 	private String gender;
-	private Timestamp hireDate;
+	private Date hireDate;
 	private String mailAddress;
 	private String zipCode;
 	private String address;
@@ -26,7 +26,7 @@ public class Employee {
 
 	}
 
-	public Employee(Integer id, String name, String image, String gender, Timestamp hireDate, String mailAddress,
+	public Employee(Integer id, String name, String image, String gender, Date hireDate, String mailAddress,
 			String zipCode, String address, String telephone, Integer salary, String characteristics,
 			Integer dependentsCount) {
 		super();
@@ -68,10 +68,10 @@ public class Employee {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
-	public Timestamp getHireDate() {
+	public Date getHireDate() {
 		return hireDate;
 	}
-	public void setHireDate(Timestamp hireDate) {
+	public void setHireDate(Date hireDate) {
 		this.hireDate = hireDate;
 	}
 	public String getMailAddress() {
